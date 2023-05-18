@@ -12,12 +12,19 @@ namespace Module9
         {
             try
             {
-
+                Console.WriteLine("Блок try запущен.");
+                throw new ArgumentOutOfRangeException("Сообщение об ошибке");
             }
-            catch
+            catch(ArgumentOutOfRangeException ex)
             {
-
+                Console.WriteLine("Блок catch запущен.");
+                Console.WriteLine(ex.Message);
             }
+            finally
+            {
+                Console.WriteLine("Блок finally запущен.");
+            }
+            Console.ReadKey();
         }
     }
 }
