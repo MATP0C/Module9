@@ -6,25 +6,23 @@ using System.Threading.Tasks;
 
 namespace Module9
 {
-    internal class Program
+    class Program
     {
+        delegate int CalculateDelegate(int a, int b);
         static void Main(string[] args)
         {
-            try
-            {
-                Console.WriteLine("Блок try запущен.");
-                throw new RankException("Сообщение об ошибке");
-            }
-            catch(RankException ex)
-            {
-                Console.WriteLine("Блок catch запущен.");
-                Console.WriteLine(ex.GetType());
-            }
-            finally
-            {
-                Console.WriteLine("Блок finally запущен.");
-            }
-            Console.ReadKey();
+
+            CalculateDelegate calcDelegate = Calculate;
+            int result = calcDelegate.Invoke(100, 30);
+
+            Console.WriteLine(result);
+            Console.Read();
+
+        }
+
+        static int Calculate(int a, int b)
+        {
+            return a - b;
         }
     }
 }
