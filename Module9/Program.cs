@@ -8,26 +8,40 @@ namespace Module9
 {
     class Program
     {
-        delegate void CalculateDelegate(int a, int b);
+        delegate void ShowMessageDelegate();
+        delegate int SumDelegate(int a, int b, int c);
+        delegate bool CheckLengthDelegate(string row);
+
         static void Main(string[] args)
         {
+            ShowMessageDelegate showMessageDelegate = ShowMessage;
+            showMessageDelegate.Invoke();
 
-            CalculateDelegate calcDelegate = CalculateOne;
-            calcDelegate += CalculateTwo;
+            SumDelegate sumDelegate = Sum;
+            int result = sumDelegate.Invoke(1, 30, 120);
+            Console.WriteLine(result);
 
-            calcDelegate -= CalculateTwo;
+            CheckLengthDelegate checkLengthDelegate = CheckLength;
+            bool status = checkLengthDelegate.Invoke("skill_factory");
+            Console.WriteLine(status);
 
-            calcDelegate.Invoke(100, 30);
-            Console.Read();
-
+            Console.ReadLine();
         }
-        static void CalculateOne(int a, int b)
+
+        static void ShowMessage()
         {
-             Console.WriteLine(a - b);
+            Console.WriteLine("Hello World!");
         }
-        static void CalculateTwo(int a, int b)
+
+        static int Sum(int a, int b, int c)
         {
-            Console.WriteLine(a + b);
+            return a + b + c;
+        }
+
+        static bool CheckLength(string _row)
+        {
+            if (_row.Length > 3) return true;
+            return false;
         }
     }
 }
