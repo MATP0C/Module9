@@ -8,28 +8,23 @@ namespace Module9
 {
     class Program
     {
-        delegate int CalculateDelegate(int a, int b);
-        delegate int SumDelegate(int c, int d);
+        delegate void CalculateDelegate(int a, int b);
         static void Main(string[] args)
         {
 
-            CalculateDelegate calcDelegate = Calculate;
-            int result1 = calcDelegate.Invoke(100, 30);
-            SumDelegate sumDelegate = Sum;
-            int result2 = sumDelegate(200, 60);
-
-            Console.WriteLine(result1);
-            Console.WriteLine(result2);
+            CalculateDelegate calcDelegate = CalculateOne;
+            calcDelegate += CalculateTwo;
+            calcDelegate.Invoke(100, 30);
             Console.Read();
 
         }
-        static int Sum(int c, int d)
+        static void CalculateOne(int a, int b)
         {
-            return c + d;
+             Console.WriteLine(a - b);
         }
-        static int Calculate(int a, int b)
+        static void CalculateTwo(int a, int b)
         {
-            return a - b;
+            Console.WriteLine(a + b);
         }
     }
 }
