@@ -8,16 +8,40 @@ namespace Module9
 {
     class Program
     {
-        delegate int RandomNumberDelegate();
         static void Main(string[] args)
         {
-            RandomNumberDelegate randomNumberDelegate = () =>
+            try
             {
-                return new Random().Next(0, 100);
-            };
-            int result = randomNumberDelegate.Invoke();
-            Console.WriteLine(result);
-            Console.Read();
+                Metod();
+                throw new Exception("Исключение");
+            }
+            catch(Exception ex) when (ex.Message == "Исключение")
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch(Exception ex) when (ex is ArgumentException)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch(Exception ex) when (ex is FormatException)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex) when (ex is IndexOutOfRangeException)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            catch (Exception ex) when (ex is OverflowException)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            finally
+            {
+                Console.WriteLine("Блок finally");
+            }
+        }
+        static void Metod()
+        {
         }
     }
 }
